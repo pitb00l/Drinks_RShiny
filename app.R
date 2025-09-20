@@ -286,7 +286,7 @@ server <- function(input, output, session) {
     DT::datatable(df, options = list(pageLength = 5, scrollX = TRUE))
   })
   
-  # ---- Plots & downloads (unchanged) ----
+  # ---- Plots & downloads ----
   output$alcoholPlot <- renderPlot({
     req(nrow(filtered()) > 0)
     ggplot(filtered(), aes(x = factor(Alcohol_Content), fill = Country)) +
@@ -467,7 +467,7 @@ server <- function(input, output, session) {
       }
     })
     
-    # Tukey HSD table (if appropriate)
+    # Tukey HSD table 
     output$anova_subtype_tukey <- DT::renderDataTable({
       df_local <- filtered()
       counts <- df_local %>% group_by(Subtype) %>% summarise(n = n()) %>% filter(n >= 2)
@@ -567,3 +567,4 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui, server)
+
